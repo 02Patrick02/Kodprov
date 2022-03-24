@@ -5,7 +5,7 @@ h1{
 
 div{
     position: absolute;
-    margin-top: 22vh;
+    margin-top: 25vh;
     margin-left:20vw;
     border:1px solid black;
     width:40px;
@@ -25,14 +25,14 @@ section{
 
 article{
     text-align: center;
-    margin-top: 50vh;
+    margin-top: 30vh;
     font-size: 3em;
 }
 button{
     margin-top: 2vh;
-    margin-left: 90vw;
+    margin-left: 93vw;
 }
 
 h3{
-     margin-left: 90vw ;
+     margin-left: 93vw ;
 }
