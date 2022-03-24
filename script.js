@@ -76,13 +76,10 @@ function placingBoard(){
             ship1.addEventListener("click", () => {
                 block.id = Math.floor(Math.random() * 100);
                 console.log("ran: " + Math.floor(Math.random() * 100));
-                
                 localStorage.setItem("id", block.id);
-                // block.style.display = "hidden";
-                
                 console.log(block.id);
             });
-            /*block.addEventListener("click", () => {
+            block.addEventListener("click", () => {
                 let next = block.nextElementSibling;
                 let prev = block.previousElementSibling;
                 localStorage.setItem("prevId", prev.id);
@@ -94,17 +91,14 @@ function placingBoard(){
                 next.style.backgroundColor= "orange";
                 
                 console.log(block.id);
-            });*/
+            });
 
             ship2.addEventListener("click", () => {
                 block.id = Math.floor(Math.random() * 100);
                 let next = block.nextElementSibling;
-                let prev = block.previousElementSibling;
                 
                 localStorage.setItem("ship2Id2", block.id);
-                localStorage.setItem("ship2Id3", prev.id);
-                console.log("next: " + next.id);
-                // block.style.display = "hidden";
+                localStorage.setItem("ship2Id3", next.id);
                 
                 console.log(next.id);
             });
