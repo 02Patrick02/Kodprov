@@ -1,11 +1,11 @@
 h1{
-    font-size: 4em;
     text-align: center;
-
+    font-size: 4em;
 }
+
 div{
     position: absolute;
-    margin-top: 20vh;
+    margin-top: 22vh;
     margin-left:20vw;
     border:1px solid black;
     width:40px;
@@ -16,8 +16,23 @@ div{
     margin-left:60vw;
 }
 
-p{
+section{
+    display: grid;
+    grid-template-columns: auto auto;
     text-align: center;
-    margin-top: 60vh;
+    font-size: larger;
+}
+
+article{
+    text-align: center;
+    margin-top: 50vh;
     font-size: 3em;
+}
+button{
+    margin-top: 2vh;
+    margin-left: 90vw;
+}
+
+h3{
+     margin-left: 90vw ;
 }
