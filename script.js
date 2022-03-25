@@ -106,14 +106,8 @@ function placingBoard(){
             ship2.addEventListener("click", () => {
                 block.addEventListener("mouseenter", () => { 
                     let next = block.nextElementSibling;
-
-                    if(placementIsValid(block)){
-                        block.style.backgroundColor = "blue";
-                        next.style.backgroundColor = "blue";
-                    }else{
-                        block.style.backgroundColor = "red";
-                        next.style.backgroundColor = "red";
-                    }
+                    block.style.backgroundColor = "blue";
+                    next.style.backgroundColor = "blue";
                 });
                 
                 block.addEventListener("mouseleave", () => {
@@ -124,10 +118,6 @@ function placingBoard(){
                 });
                 
                 block.addEventListener("click", () => {
-                    if(!placementIsValid(block)){ 
-                        return;
-                    }
-                
                     let next = block.nextElementSibling;
                     
                     localStorage.setItem(block.id, block.id);
@@ -146,16 +136,10 @@ function placingBoard(){
                 block.addEventListener("mouseenter", () => { 
                     let next = block.nextElementSibling; 
                     let prev = block.previousElementSibling;
-
-                    if(placementIsValid(block)){
-                        block.style.backgroundColor = "blue";
-                        prev.style.backgroundColor = "blue";
-                        next.style.backgroundColor = "blue";
-                    }else{
-                        block.style.backgroundColor = "red";
-                        prev.style.backgroundColor = "red";
-                        next.style.backgroundColor = "red";
-                    }
+                    
+                    block.style.backgroundColor = "blue";
+                    prev.style.backgroundColor = "blue";
+                    next.style.backgroundColor = "blue";
                 });
                 
                 block.addEventListener("mouseleave", () => {
@@ -168,10 +152,6 @@ function placingBoard(){
                 });
 
                 block.addEventListener("click", () => {
-                    if(!placementIsValid(block)){ 
-                        return;
-                    }
-                    
                     let next = block.nextElementSibling;
                     let prev = block.previousElementSibling;
 
@@ -194,19 +174,12 @@ function placingBoard(){
                     let prev2 = prev.previousElementSibling;
                     let next = block.nextElementSibling; 
                     
-                    if(placementIsValid(block)){
-                        prev.style.backgroundColor = "blue";
-                        prev2.style.backgroundColor = "blue";
-                        block.style.backgroundColor = "blue";
-                        next.style.backgroundColor = "blue";
-                    }else{
-                        prev.style.backgroundColor = "red";
-                        prev2.style.backgroundColor = "red";
-                        block.style.backgroundColor = "red";
-                        next.style.backgroundColor = "red";
-                    }
+                    prev.style.backgroundColor = "blue";
+                    prev2.style.backgroundColor = "blue";
+                    block.style.backgroundColor = "blue";
+                    next.style.backgroundColor = "blue";
                 });
-    
+                
                 block.addEventListener("mouseleave", () => {
                     let prev = block.previousElementSibling;
                     let prev2 = prev.previousElementSibling;
@@ -219,10 +192,6 @@ function placingBoard(){
                 });
                 
                 block.addEventListener("click", () => {
-                    if(!placementIsValid(block)){ 
-                        return;
-                    }
-                    
                     let prev = block.previousElementSibling;
                     let prev2 = prev.previousElementSibling;
                     let next = block.nextElementSibling;
@@ -249,19 +218,11 @@ function placingBoard(){
                     let next = block.nextElementSibling; 
                     let next2 = next.nextElementSibling; 
                     
-                    if(placementIsValid(block)){
-                        prev.style.backgroundColor = "blue";
-                        prev2.style.backgroundColor = "blue";
-                        block.style.backgroundColor = "blue";
-                        next.style.backgroundColor = "blue";
-                        next2.style.backgroundColor = "blue";
-                    }else{
-                        prev.style.backgroundColor = "red";
-                        prev2.style.backgroundColor = "red";
-                        block.style.backgroundColor = "red";
-                        next.style.backgroundColor = "red";
-                        next2.style.backgroundColor = "red";
-                    }
+                    prev.style.backgroundColor = "blue";
+                    prev2.style.backgroundColor = "blue";
+                    block.style.backgroundColor = "blue";
+                    next.style.backgroundColor = "blue";
+                    next2.style.backgroundColor = "blue";
                 });
                 
                 block.addEventListener("mouseleave", () => {
@@ -275,14 +236,9 @@ function placingBoard(){
                     block.style.backgroundColor = "aqua";
                     next.style.backgroundColor = "aqua";
                     next2.style.backgroundColor = "aqua";
-                    
                 });
                 
                 block.addEventListener("click", () => {
-                    if(!placementIsValid(block)){ 
-                        return;
-                    }
-                    
                     let prev = block.previousElementSibling;
                     let prev2 = prev.previousElementSibling;
                     let next = block.nextElementSibling;
@@ -304,9 +260,4 @@ function placingBoard(){
             });
         }
     }
-}    
-    
-//checks if placement is valid or not
-function placementIsValid(block){
-    return !(block.id % 10 < 1 || block.id % 10 > 8);
 }
