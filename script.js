@@ -10,7 +10,6 @@ function init(){
     window.localStorage.clear();
 }
 
-
 function guessingBoard(){
     let guess = document.getElementById("guess");
     let counter = 0;
@@ -32,28 +31,13 @@ function guessingBoard(){
             block.addEventListener("click", () => {
                 block.style.backgroundColor = "red";
 
-                if(block.style.backgroundColor == "green"){ //return if already clicked
+                //return if already clicked
+                if(block.style.backgroundColor === "green"){ 
                     return;
                 }
 
                 //getting the saved value from localstorage
-                if(block.id == localStorage.getItem("id", block.id) ||  
-                block.id == localStorage.getItem("clickId", block.id) || 
-                block.id == localStorage.getItem("nextId", block.id) ||  
-                block.id == localStorage.getItem("prevId", block.id) ){
-                    block.style.backgroundColor = "green";
-                }
-
-                //getting value for button 2 from localstorage
-                if(block.id == localStorage.getItem("ship2Id1", block.id) ||
-                   block.id == localStorage.getItem("ship2Id2", block.id) ){
-                    block.style.backgroundColor = "green";
-                }
-
-                //button 3
-                if(block.id == localStorage.getItem("ship3Id1", block.id) || 
-                block.id == localStorage.getItem("ship3Id2", block.id) ||  
-                block.id == localStorage.getItem("ship3Id3", block.id) ){
+                if(block.id == localStorage.getItem(block.id, block.id)){
                     block.style.backgroundColor = "green";
                 }
 
@@ -68,10 +52,12 @@ function guessingBoard(){
 }
 
 function placingBoard(){
-    let place = document.getElementById("placingships");
+    let place = document.getElementById("place");
     let ship1 = document.getElementById("shipsBtn1");
     let ship2 = document.getElementById("shipsBtn2");
     let ship3 = document.getElementById("shipsBtn3");
+    let ship4 = document.getElementById("shipsBtn4");
+    let ship5 = document.getElementById("shipsBtn5");
     
     let counter = 0;
     
@@ -90,83 +76,234 @@ function placingBoard(){
             block.style.backgroundColor = "aqua";
             
             ship1.addEventListener("click", () => {
-                block.id = Math.floor(Math.random() * 100); //getting random id form 1-100
-                localStorage.setItem("id", block.id); //saving value in local storage
-            });
-
-            //hovering over gameboard to indicate placement
-            block.addEventListener("mouseenter", () => { 
-                let next = block.nextElementSibling; 
-                let prev = block.previousElementSibling;
-
-                if(placementIsValid(block)){
-                    block.style.backgroundColor = "pink";
-                    prev.style.backgroundColor = "pink";
-                    next.style.backgroundColor = "pink";
-                }else{
-                    block.style.backgroundColor = "red";
-                    prev.style.backgroundColor = "red";
-                    next.style.backgroundColor = "red";
-                }
-            });
-
-            //reseting color after leaving gameboard
-            block.addEventListener("mouseleave", () => {
-                let next = block.nextElementSibling;
-                let prev = block.previousElementSibling;
-
-                next.style.backgroundColor = "aqua";
-                prev.style.backgroundColor = "aqua";
-                block.style.backgroundColor = "aqua";
-            });
-
-            //if placement is not valid, dont save value else save it in localstorage
-            block.addEventListener("click", () => {
-                if(!placementIsValid(block)){ 
-                    return;
-                }
-
-                let next = block.nextElementSibling;
-                let prev = block.previousElementSibling;
-
-                localStorage.setItem("prevId", prev.id);
-                localStorage.setItem("id", block.id);
-                localStorage.setItem("nextId", next.id);
+                block.addEventListener("mouseenter", () => { 
+                    block.style.backgroundColor = "blue";
+                });
                 
-                block.style.backgroundColor= "orange";
-                prev.style.backgroundColor= "orange";
-                next.style.backgroundColor= "orange";
-            });
+                //reseting color after leaving gameboard
+                block.addEventListener("mouseleave", () => {
+                    block.style.backgroundColor = "aqua";
+                });
 
+                 //if placement is not valid, dont save value else save it in localstorage
+                block.addEventListener("click", () => {
+                    localStorage.setItem(block.id, block.id);
+   
+                    ship1.style.display = "none";
+                    block.style.backgroundColor = "orange";
+                });
+            });
+            
             //button 2
             ship2.addEventListener("click", () => {
-                block.id = Math.floor(Math.random() * 100);
+
+                block.addEventListener("mouseenter", () => { 
+                    let next = block.nextElementSibling; 
+                    if(placementIsValid(block)){
+                        block.style.backgroundColor = "blue";
+                        next.style.backgroundColor = "blue";
+                    }else{
+                        block.style.backgroundColor = "red";
+                        next.style.backgroundColor = "red";
+                    }
+                });
                 
-                let next = block.nextElementSibling;
-
-                next.id = block.id++;
-
-                localStorage.setItem("ship2Id1", block.id);
-                localStorage.setItem("ship2Id2", next.id);
+                //reseting color after leaving gameboard
+                block.addEventListener("mouseleave", () => {
+                    let next = block.nextElementSibling;
+    
+                    next.style.backgroundColor = "aqua";
+                    block.style.backgroundColor = "aqua";
+                });
+                
+                 //if placement is not valid, dont save value else save it in localstorage
+                block.addEventListener("click", () => {
+                    if(!placementIsValid(block)){ 
+                        return;
+                    }
+                
+                    let next = block.nextElementSibling;
+                    
+                    localStorage.setItem(block.id, block.id);
+                    localStorage.setItem(next.id, next.id);
+                    
+                    ship2.style.display = "none";
+                    block.style.backgroundColor = "orange";
+                    next.style.backgroundColor = "orange";
+                    
+                });
             });
 
             //button 3
             ship3.addEventListener("click", () => {
-                block.id = Math.floor(Math.random() * 100);
-                let next = block.nextElementSibling;
-                let prev = block.previousElementSibling;
-                
-                next.id = block.id++;
-                prev.id = block.id++;
+                block.addEventListener("mouseenter", () => { 
+                    let next = block.nextElementSibling; 
+                    let prev = block.previousElementSibling;
 
-                localStorage.setItem("ship3Id1", prev.id);
-                localStorage.setItem("ship3Id2", block.id);
-                localStorage.setItem("ship3Id3", next.id);
+                    if(placementIsValid(block)){
+                        block.style.backgroundColor = "blue";
+                        prev.style.backgroundColor = "blue";
+                        next.style.backgroundColor = "blue";
+                    }else{
+                        block.style.backgroundColor = "red";
+                        prev.style.backgroundColor = "red";
+                        next.style.backgroundColor = "red";
+                    }
+                });
+                
+                //reseting color after leaving gameboard
+                block.addEventListener("mouseleave", () => {
+                    let next = block.nextElementSibling;
+                    let prev = block.previousElementSibling;
+    
+                    next.style.backgroundColor = "aqua";
+                    prev.style.backgroundColor = "aqua";
+                    block.style.backgroundColor = "aqua";
+                });
+
+                //if placement is not valid, dont save value else save it in localstorage
+                block.addEventListener("click", () => {
+                    if(!placementIsValid(block)){ 
+                        return;
+                    }
+                    
+                    let next = block.nextElementSibling;
+                    let prev = block.previousElementSibling;
+
+                    localStorage.setItem(prev.id, prev.id);
+                    localStorage.setItem(block.id, block.id);
+                    localStorage.setItem(next.id, next.id);
+                    
+                    ship3.style.display = "none";
+                    block.style.backgroundColor = "orange";
+                    prev.style.backgroundColor = "orange";
+                    next.style.backgroundColor = "orange";
+                });
+            });
+            
+            //button 4
+            ship4.addEventListener("click", () => {
+                block.addEventListener("mouseenter", () => { 
+                    let prev = block.previousElementSibling;
+                    let prev2 = prev.previousElementSibling;
+                    let next = block.nextElementSibling; 
+                    
+                    if(placementIsValid(block)){
+                        prev.style.backgroundColor = "blue";
+                        prev2.style.backgroundColor = "blue";
+                        block.style.backgroundColor = "blue";
+                        next.style.backgroundColor = "blue";
+                    }else{
+                        prev.style.backgroundColor = "red";
+                        prev2.style.backgroundColor = "red";
+                        block.style.backgroundColor = "red";
+                        next.style.backgroundColor = "red";
+                    }
+                });
+                
+                //reseting color after leaving gameboard
+                block.addEventListener("mouseleave", () => {
+                    let prev = block.previousElementSibling;
+                    let prev2 = prev.previousElementSibling;
+                    let next = block.nextElementSibling;
+
+                    prev.style.backgroundColor = "aqua";
+                    prev2.style.backgroundColor = "aqua";
+                    block.style.backgroundColor = "aqua";
+                    next.style.backgroundColor = "aqua";
+                });
+                
+                
+                //if placement is not valid, dont save value else save it in localstorage
+                block.addEventListener("click", () => {
+                    if(!placementIsValid(block)){ 
+                        return;
+                    }
+                    
+                    let prev = block.previousElementSibling;
+                    let prev2 = prev.previousElementSibling;
+                    let next = block.nextElementSibling;
+                    
+                    localStorage.setItem(prev.id, prev.id);
+                    localStorage.setItem(prev2.id, prev2.id);
+                    localStorage.setItem(block.id, block.id);
+                    localStorage.setItem(next.id, next.id);
+                    
+                    ship4.style.display = "none";
+                    prev.style.backgroundColor = "orange";
+                    prev2.style.backgroundColor = "orange";
+                    block.style.backgroundColor = "orange";
+                    next.style.backgroundColor = "orange";
+                });
+            });
+            
+            //button 5
+            ship5.addEventListener("click", () => {
+                block.addEventListener("mouseenter", () => { 
+                    let prev = block.previousElementSibling;
+                    let prev2 = prev.previousElementSibling;
+                    let next = block.nextElementSibling; 
+                    let next2 = next.nextElementSibling; 
+                    
+                    if(placementIsValid(block)){
+                        prev.style.backgroundColor = "blue";
+                        prev2.style.backgroundColor = "blue";
+                        block.style.backgroundColor = "blue";
+                        next.style.backgroundColor = "blue";
+                        next2.style.backgroundColor = "blue";
+                    }else{
+                        prev.style.backgroundColor = "red";
+                        prev2.style.backgroundColor = "red";
+                        block.style.backgroundColor = "red";
+                        next.style.backgroundColor = "red";
+                        next2.style.backgroundColor = "red";
+                    }
+                });
+                
+                //reseting color after leaving gameboard
+                block.addEventListener("mouseleave", () => {
+                    let prev = block.previousElementSibling;
+                    let prev2 = prev.previousElementSibling;
+                    let next = block.nextElementSibling;
+                    let next2 = next.nextElementSibling;
+
+                    prev.style.backgroundColor = "aqua";
+                    prev2.style.backgroundColor = "aqua";
+                    block.style.backgroundColor = "aqua";
+                    next.style.backgroundColor = "aqua";
+                    next2.style.backgroundColor = "aqua";
+                    
+                });
+                
+                //if placement is not valid, dont save value else save it in localstorage
+                block.addEventListener("click", () => {
+                    if(!placementIsValid(block)){ 
+                        return;
+                    }
+                    
+                    let prev = block.previousElementSibling;
+                    let prev2 = prev.previousElementSibling;
+                    let next = block.nextElementSibling;
+                    let next2 = next.nextElementSibling;
+                    
+                    localStorage.setItem(prev.id, prev.id);
+                    localStorage.setItem(prev2.id, prev2.id);
+                    localStorage.setItem(block.id, block.id);
+                    localStorage.setItem(next.id, next.id);
+                    localStorage.setItem(next2.id, next2.id);
+                    
+                    ship5.style.display = "none";
+                    block.style.backgroundColor = "orange";
+                    prev.style.backgroundColor = "orange";
+                    prev2.style.backgroundColor = "orange";
+                    next.style.backgroundColor = "orange";
+                    next2.style.backgroundColor = "orange";
+                });
             });
         }
     }
-}
-
+}    
+    
 //checks if placement is valid or not
 function placementIsValid(block){
     return !(block.id % 10 < 1 || block.id % 10 > 8);
