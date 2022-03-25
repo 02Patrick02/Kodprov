@@ -46,6 +46,9 @@ function guessingBoard(){
                     hitCounter++;     
                     hitCounterElem.innerHTML = "Score: " + hitCounter;
                 }
+                if(hitCounter >= 15){
+                    hitCounterElem.innerHTML = "You won";
+                }
             });
         }
     }
@@ -59,6 +62,10 @@ function placingBoard(){
     let ship4 = document.getElementById("shipsBtn4");
     let ship5 = document.getElementById("shipsBtn5");
     
+    ship2.style.display = "none";
+    ship3.style.display = "none";
+    ship4.style.display = "none";
+    ship5.style.display = "none";
     let counter = 0;
     
     for(let i = 0;i <= 9;i++){
@@ -90,6 +97,7 @@ function placingBoard(){
                     localStorage.setItem(block.id, block.id);
    
                     ship1.style.display = "none";
+                    ship2.style.display = "block";
                     block.style.backgroundColor = "orange";
                 });
             });
@@ -126,6 +134,7 @@ function placingBoard(){
                     localStorage.setItem(next.id, next.id);
                     
                     ship2.style.display = "none";
+                    ship3.style.display = "block";
                     block.style.backgroundColor = "orange";
                     next.style.backgroundColor = "orange";
                     
@@ -171,6 +180,7 @@ function placingBoard(){
                     localStorage.setItem(next.id, next.id);
                     
                     ship3.style.display = "none";
+                    ship4.style.display = "block";
                     block.style.backgroundColor = "orange";
                     prev.style.backgroundColor = "orange";
                     next.style.backgroundColor = "orange";
@@ -223,6 +233,7 @@ function placingBoard(){
                     localStorage.setItem(next.id, next.id);
                     
                     ship4.style.display = "none";
+                    ship5.style.display = "block";
                     prev.style.backgroundColor = "orange";
                     prev2.style.backgroundColor = "orange";
                     block.style.backgroundColor = "orange";
