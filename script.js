@@ -29,12 +29,12 @@ function guessingBoard(){
             block.style.backgroundColor = "aqua";
             
             block.addEventListener("click", () => {
-                block.style.backgroundColor = "red";
-
                 //return if already clicked
-                if(block.style.backgroundColor === "green"){ 
+                if(block.style.backgroundColor == "green"){ 
                     return;
                 }
+                
+                block.style.backgroundColor = "red";
 
                 //getting the saved value from localstorage
                 if(block.id == localStorage.getItem(block.id, block.id)){
@@ -74,7 +74,7 @@ function placingBoard(){
             block.style.top = xBlock + "px";
             block.style.left = yBlock + "px";
             block.style.backgroundColor = "aqua";
-            
+
             ship1.addEventListener("click", () => {
                 block.addEventListener("mouseenter", () => { 
                     block.style.backgroundColor = "blue";
@@ -85,7 +85,7 @@ function placingBoard(){
                     block.style.backgroundColor = "aqua";
                 });
 
-                 //if placement is not valid, dont save value else save it in localstorage
+                //if placement is not valid, dont save value else save it in localstorage
                 block.addEventListener("click", () => {
                     localStorage.setItem(block.id, block.id);
    
@@ -96,9 +96,9 @@ function placingBoard(){
             
             //button 2
             ship2.addEventListener("click", () => {
-
                 block.addEventListener("mouseenter", () => { 
-                    let next = block.nextElementSibling; 
+                    let next = block.nextElementSibling;
+
                     if(placementIsValid(block)){
                         block.style.backgroundColor = "blue";
                         next.style.backgroundColor = "blue";
@@ -108,7 +108,6 @@ function placingBoard(){
                     }
                 });
                 
-                //reseting color after leaving gameboard
                 block.addEventListener("mouseleave", () => {
                     let next = block.nextElementSibling;
     
@@ -116,7 +115,6 @@ function placingBoard(){
                     block.style.backgroundColor = "aqua";
                 });
                 
-                 //if placement is not valid, dont save value else save it in localstorage
                 block.addEventListener("click", () => {
                     if(!placementIsValid(block)){ 
                         return;
@@ -151,7 +149,6 @@ function placingBoard(){
                     }
                 });
                 
-                //reseting color after leaving gameboard
                 block.addEventListener("mouseleave", () => {
                     let next = block.nextElementSibling;
                     let prev = block.previousElementSibling;
@@ -161,7 +158,6 @@ function placingBoard(){
                     block.style.backgroundColor = "aqua";
                 });
 
-                //if placement is not valid, dont save value else save it in localstorage
                 block.addEventListener("click", () => {
                     if(!placementIsValid(block)){ 
                         return;
@@ -200,8 +196,7 @@ function placingBoard(){
                         next.style.backgroundColor = "red";
                     }
                 });
-                
-                //reseting color after leaving gameboard
+    
                 block.addEventListener("mouseleave", () => {
                     let prev = block.previousElementSibling;
                     let prev2 = prev.previousElementSibling;
@@ -213,8 +208,6 @@ function placingBoard(){
                     next.style.backgroundColor = "aqua";
                 });
                 
-                
-                //if placement is not valid, dont save value else save it in localstorage
                 block.addEventListener("click", () => {
                     if(!placementIsValid(block)){ 
                         return;
@@ -260,7 +253,6 @@ function placingBoard(){
                     }
                 });
                 
-                //reseting color after leaving gameboard
                 block.addEventListener("mouseleave", () => {
                     let prev = block.previousElementSibling;
                     let prev2 = prev.previousElementSibling;
@@ -275,7 +267,6 @@ function placingBoard(){
                     
                 });
                 
-                //if placement is not valid, dont save value else save it in localstorage
                 block.addEventListener("click", () => {
                     if(!placementIsValid(block)){ 
                         return;
